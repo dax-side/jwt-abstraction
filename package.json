@@ -1,6 +1,6 @@
 {
   "name": "@dax-side/jwt-abstraction",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Stop writing the same JWT auth code in every project. Separate secrets for access and refresh tokens.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
