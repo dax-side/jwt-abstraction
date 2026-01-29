@@ -32,12 +32,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/damola/jwt-abstraction.git"
+    "url": "git+https://github.com/dax-side/jwt-abstraction.git"
   },
   "bugs": {
-    "url": "https://github.com/damola/jwt-abstraction/issues"
+    "url": "https://github.com/dax-side/jwt-abstraction/issues"
   },
-  "homepage": "https://github.com/damola/jwt-abstraction#readme",
+  "homepage": "https://github.com/dax-side/jwt-abstraction#readme",
   "author": "Damola",
   "license": "MIT",
   "engines": {
