@@ -147,7 +147,7 @@ const jwt = useJwt({
 });
 ```
 
-## Issuer and audience (probably skip these)
+## Issuer and audience
 
 For a single backend API, `issuer` and `audience` add complexity without real security benefit. Your secret is the security.
 
@@ -156,7 +156,7 @@ These matter for:
 - OAuth/OpenID flows
 - Tokens crossing organizational boundaries
 
-If you're building a standard web app, ignore them.
+For a standard web app, you can ignore them.
 
 ## What this package doesn't do
 
