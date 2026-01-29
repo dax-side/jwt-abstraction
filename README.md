@@ -1,6 +1,33 @@
-# JWT Abstraction
+# @dax-side/jwt-abstraction
+
+[![npm version](https://badge.fury.io/js/@dax-side%2Fjwt-abstraction.svg)](https://www.npmjs.com/package/@dax-side/jwt-abstraction)
+[![GitHub](https://img.shields.io/github/stars/dax-side/jwt-abstraction?style=social)](https://github.com/dax-side/jwt-abstraction)
 
 Stop writing the same JWT auth code in every project.
+
+## The problem
+
+Every Node.js project needs JWT auth. Every time you start a new project, you write the same 60 lines:
+- Import jsonwebtoken
+- Configure algorithms and expiry
+- Create separate access/refresh tokens
+- Build Express middleware  
+- Handle token errors
+
+Same code. Different project. Over and over.
+
+This package does it in 3 lines.
+
+## Features
+
+- Zero-config JWT with secure defaults
+- Automatic access/refresh token pairs
+- Separate secrets for access and refresh tokens
+- Express middleware included
+- TypeScript support with strict mode
+- Proper error types
+- 100% test coverage
+- Zero dependencies except jsonwebtoken
 
 ## Install
 
@@ -15,19 +42,23 @@ import { useJwt } from '@dax-side/jwt-abstraction';
 
 const jwt = useJwt();
 
-// Create tokens
 const tokens = jwt.create({ userId: 123, email: 'user@example.com' });
-
-// Verify tokens
 const payload = await jwt.verify(tokens.accessToken);
 
-// Protect Express routes
 app.get('/profile', jwt.protect(), (req, res) => {
   res.json({ user: req.user });
 });
 ```
 
 Three lines. Done.
+
+## Quick start
+
+1. `npm install @dax-side/jwt-abstraction`
+2. Set `JWT_SECRET=your-secret` in your environment
+3. Add the code above to your Express app
+
+You now have working JWT auth.
 
 ## How it works
 
@@ -50,11 +81,8 @@ The package creates two tokens: an access token (15 minutes) and a refresh token
 Use different secrets for access and refresh tokens:
 
 ```typescript
-// In your .env file
 JWT_SECRET=your-access-secret
 JWT_REFRESH_SECRET=your-refresh-secret
-
-const jwt = useJwt();
 ```
 
 Why? Refresh tokens live longer. If your access secret leaks, refresh tokens stay safe.
@@ -74,7 +102,7 @@ const jwt = useJwt({
 });
 ```
 
-`JWT_SECRET` is just a convention. Name your variables whatever you want.
+`JWT_SECRET` is a convention, not a requirement. Name your variables whatever you want.
 
 ## Complete example
 
@@ -92,6 +120,7 @@ app.post('/login', (req, res) => {
   const tokens = jwt.create(user);
   res.json(tokens);
 });
+
 app.get('/profile', jwt.protect(), (req, res) => {
   res.json({ user: req.user });
 });
@@ -147,6 +176,20 @@ const jwt = useJwt({
 });
 ```
 
+## Common issues
+
+**Error: JWT_SECRET environment variable is not set**
+
+Set `JWT_SECRET` in your environment or pass the `secret` option.
+
+**Error: Token expired**
+
+Access tokens expire in 15 minutes by default. Use the refresh token to get new ones.
+
+**Middleware not attaching req.user**
+
+Make sure `express.json()` runs before `jwt.protect()`.
+
 ## Issuer and audience
 
 For a single backend API, `issuer` and `audience` add complexity without real security benefit. Your secret is the security.
@@ -201,22 +244,26 @@ const payload = await verifyToken(token, { secret: 'my-secret' });
 app.get('/protected', protect({ secret: 'my-secret' }), handler);
 ```
 
-## TypeScript
+## Why not use...
 
-Written in TypeScript with strict mode. Full type definitions included.
+**jsonwebtoken directly?**
 
-## Testing
+You can. This removes the boilerplate. If you want full control, use jsonwebtoken. If you want it done in 3 lines, use this.
 
-100% test coverage. 94 tests covering all functionality.
+**Passport?**
 
-## Why this package exists
+Different use case. Passport handles multiple auth strategies (OAuth, local, SAML). This is JWT-only and simpler.
 
-Writing JWT auth means:
-- Importing jsonwebtoken
-- Configuring algorithms and expiry times
-- Creating access and refresh tokens separately
-- Building Express middleware
-- Handling three different error types
-- Writing the same boilerplate in every project
+**express-jwt?**
 
-This package does all that. You get secure defaults, TypeScript support, and Express middleware out of the box.
+Deprecated and archived. Doesn't handle token creation or refresh flows.
+
+## Contributing
+
+Found a bug? Have a feature request?
+- [Open an issue](https://github.com/dax-side/jwt-abstraction/issues)
+- [Submit a PR](https://github.com/dax-side/jwt-abstraction/pulls)
+
+## License
+
+MIT
