@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/dax-side/jwt-abstraction/issues"
   },
-  "homepage": "https://github.com/dax-side/jwt-abstraction#readme",
+  "homepage": "https://dax-side.github.io/jwt-abstraction-site",
   "author": "Damola",
   "license": "MIT",
   "engines": {
