@@ -1,6 +1,6 @@
 {
   "name": "@dax-side/jwt-abstraction",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Stop writing the same JWT auth code in every project. Separate secrets for access and refresh tokens.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,7 +44,7 @@
     "node": ">=16.0.0"
   },
   "peerDependencies": {
-    "express": "^5.2.1"
+    "express": ">=4.11"
   },
   "peerDependenciesMeta": {
     "express": {
@@ -52,7 +52,6 @@
     }
   },
   "dependencies": {
-    "@dax-side/jwt-abstraction": "^0.2.1",
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
